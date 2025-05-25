@@ -13,7 +13,7 @@ Then, run `assembly.py` and you should see a file named `output.mc`. Once you ha
 
 Then find the schematic in `schems\` and drag it into your WorldEdit schematic folder. (Under `.minecraft\config\worldedit\schematics` by default)
 
-Then, go in-game and load the schematic with `//schem load SCHEMATIC`. Stand underneath the glass that says "paste here" and run `//paste`.
+Then, go in-game and load the schematic with `//schem load rom`, or use whatever you named the schematic. Stand underneath the glass that says "paste here" and run `//paste -a`.
 
 ## Program ROM
 For a brief explanation on how the barrel ROM works, each barrel has a different amount of items in them, which in turn allow them to produce a redstone signal strength which represent binary machine code in hexadecimal. SB CPU 3 automatically converts the hexadecimal signal strength into binary when loading the ROM into the cache.
