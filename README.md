@@ -72,3 +72,6 @@ SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course o
 - **ALU:** A fully-featured CCA-based ALU including a right/arithmetic shifter. Includes 3 flags (carry, negative, zero)
 - **Stack:** 16-deep, 11-bit general stack supporting call/return, push, and pop functions
 - **Branching:** 11-bit address jumping and 6 branch conditions which cover the entire range of the program memory for jumps (no relative jumps/branches)
+
+![image](https://github.com/user-attachments/assets/88832381-2905-4b52-818c-f5074f950f85)
+
