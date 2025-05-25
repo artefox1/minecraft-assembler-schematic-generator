@@ -1,4 +1,4 @@
-# Custom Python Assembler and Minecraft Barrel ROM Schematic Generator
+# Custom Python Assembler and Minecraft Barrel ROM Schematic Generator for 1.20.4
 
 The assembler is written for the [SB CPU 3 ISA](https://docs.google.com/spreadsheets/d/145FgBEBUMqR2AwzehXJ7kyqvEKSq50dz7CUwtCOcKwo/edit?usp=sharing).
 
