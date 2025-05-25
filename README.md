@@ -15,6 +15,7 @@ Then find the schematic in `schems\` and drag it into your WorldEdit schematic f
 
 Then, go in-game and load the schematic with `//schem load SCHEMATIC`. Stand underneath the glass that says "paste here" and run `//paste`.
 
+## Program ROM
 For a brief explanation on how the barrel ROM works, each barrel has a different amount of items in them, which in turn allow them to produce a redstone signal strength which represent binary machine code in hexadecimal. SB CPU 3 automatically converts the hexadecimal signal strength into binary when loading the ROM into the cache.
 
 Barrels can hold items that represent a signal strength from 0-15. This gives barrels half a byte (nibble) of storage (4 bits).
@@ -46,6 +47,7 @@ The table above represents the higher-level view of barrel columns, where each p
 
 For more details on how the ROM is setup: [Program ROM Specification](https://docs.google.com/document/d/1EYDpcNFcqlE6iPf35c7rxj5VtfZCbD8b9FlhQ1oX37A/edit?usp=sharing)
 
+## CPU
 SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course of 10 months. The instruction set and pipelining layout is fully custom built for SB CPU 3.
 ### SB CPU 3 Specs:
 - **Architecture:** 4-stage pipeline (fetch, decode, execute, writeback)
