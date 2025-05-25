@@ -6,6 +6,8 @@ The assembler is not case sensitive, and comments can be written with ; # /.
 
 Multiple expressions on the same line get logically OR'ed together.
 
+Thanks to [Sloimay](https://github.com/Sloimayyy/mcschematic) for his WorldEdit schematic generator.
+
 ## Instructions
 Write your assembly code in asm.sb, or create a new file and make sure to reference it in `assembly.py` under `asmcode = open('YOURFILE.sb', 'r')`
 
