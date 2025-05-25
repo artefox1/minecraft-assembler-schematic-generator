@@ -1,5 +1,4 @@
 # Copyright © 2025 artefox
-# Licensed under the MIT License
 
 asmcode = open('asm.sb', 'r')
 mccode = open('output.mc', 'w')

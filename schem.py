@@ -1,5 +1,4 @@
 # Copyright © 2025 artefox
-# Licensed under the MIT License
 
 import mcschematic
 schem = mcschematic.MCSchematic()
