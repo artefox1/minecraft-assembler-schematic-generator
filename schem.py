@@ -3,8 +3,9 @@
 import mcschematic
 schem = mcschematic.MCSchematic()
 
-mccode = open('output.mc', 'r') # HAS TO BE 2048 LINES
-#out = open('temp.txt', 'w')
+mccode = open('machine/output.mc', 'r') # CHANGE OUTPUT.MC TO YOUR MACHINE CODE FILE
+
+# HAS TO BE 2048 LINES
 barrels = [
     'minecraft:barrel[facing=up]{Items:[{Slot:0b,id:"minecraft:redstone",Count:64b},{Slot:1b,id:"minecraft:redstone",Count:59b}]}',
     'minecraft:barrel[facing=up]{Items:[{Slot:0b,id:"minecraft:redstone",Count:64b},{Slot:1b,id:"minecraft:redstone",Count:64b},{Slot:2b,id:"minecraft:redstone",Count:64b},{Slot:3b,id:"minecraft:redstone",Count:54b}]}',

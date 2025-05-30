@@ -1,7 +1,10 @@
 # Copyright © 2025 artefox
+# idk why you would want to use this code ever, but here it is anyway
 
-asmcode = open('asm.sb', 'r')
-mccode = open('output.mc', 'w')
+# todo: labels
+
+asmcode = open('assembly/asm.s', 'r') # CHANGE ASM.S TO YOUR ASSEMBLY FILE
+mccode = open('machine/output.mc', 'w') # CHANGE OUTPUT.MC TO YOUR MACHINE CODE FILE
 
 output = []
 
@@ -10,7 +13,7 @@ regs0   = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7']
 regs1   = ['reg0', 'reg1', 'reg2', 'reg3', 'reg4', 'reg5', 'reg6', 'reg7']
 regs2   = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
-symbols = {}
+symbols = {} # dictionary to hold symbols and their corresponding values
 for index, value in enumerate(opcodes):
     symbols[value] = index
 for index, value in enumerate(regs0):
@@ -29,31 +32,44 @@ lines = [line.split() for line in lines] # turn into elements per line
 
 # OP    C      A   B
 # 00000 000 00 000 000
+#     0   1      2
 
 offset0 = pow(2, 11)
 offset1 = pow(2, 8)
 offset2 = pow(2, 3)
 
-def evaluateImmediate(imm):
-    return int(imm, 0)
+def evaluateImmediate8(imm):
+    return int(imm, 0) % offset1
+
+def evaluateImmediate11(imm):
+    return int(imm, 0) % offset0 # if its more, then like wrap around lol
 
 def interpretZeroOperands(l):
     return (symbols[l[0]] * offset0) # OP
 
-def interpretTwoOperands0(l):
+def interpretOneOperandA(l):
+    return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset2) # A
+
+def interpretOneOperandC(l):
+    return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) # C
+
+def interpretTwoOperandsCA(l):
     return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) + (symbols[l[2]] * offset2) # C A
 
-def interpretTwoOperands1(l):
+def interpretTwoOperandsCB(l):
+    return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) + (symbols[l[2]]) # C B
+
+def interpretTwoOperandsAB(l):
     return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset2) + (symbols[l[2]]) # A B
 
 def interpretThreeOperands(l):
     return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) + (symbols[l[2]] * offset2) + (symbols[l[3]]) # C A B
 
 def interpretZeroImmediate(l):
-    return (symbols[l[0]] * offset0) + (evaluateImmediate(l[1])) # IMM not in my isa but can be useful
+    return (symbols[l[0]] * offset0) + (evaluateImmediate11(l[1])) # IMM like 11 bit or something
 
 def interpretOneImmediate(l):
-    return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) + (evaluateImmediate(l[2])) # C IMM
+    return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) + (evaluateImmediate8(l[2])) # C IMM
 
 for line in lines:
     if line[0] == 'nop':
@@ -62,34 +78,64 @@ for line in lines:
         output.append(interpretZeroOperands(line))
     elif line[0] == 'add':
         output.append(interpretThreeOperands(line))
+    elif line[0] == 'adc':
+        output.append(interpretThreeOperands(line))
+    elif line[0] == 'adi':
+        output.append(interpretOneImmediate(line))
     elif line[0] == 'sub':
+        output.append(interpretThreeOperands(line))
+    elif line[0] == 'sbb':
         output.append(interpretThreeOperands(line))
     elif line[0] == 'and':
         output.append(interpretThreeOperands(line))
-    elif line[0] == 'ior':
+    elif line[0] == 'bor':
         output.append(interpretThreeOperands(line))
     elif line[0] == 'nor':
         output.append(interpretThreeOperands(line))
     elif line[0] == 'xor':
         output.append(interpretThreeOperands(line))
-    elif line[0] == 'adc':
-        output.append(interpretThreeOperands(line))
     elif line[0] == 'rsh':
-        output.append(interpretTwoOperands0(line))
-    elif line[0] == 'jid':
-        output.append(interpretThreeOperands(line))
-    elif line[0] == 'jmp':
-        output.append(interpretOneImmediate(line))
-    elif line[0] == 'mld':
-        output.append(interpretTwoOperands0(line))
-    elif line[0] == 'mst':
-        output.append(interpretTwoOperands1(line))
+        output.append(interpretTwoOperandsCA(line))
+    elif line[0] == 'ash':
+        output.append(interpretTwoOperandsCA(line))
+    elif line[0] == 'mov':
+        output.append(interpretTwoOperandsCA(line))
     elif line[0] == 'ldi':
         output.append(interpretOneImmediate(line))
-    elif line[0] == 'pld':
-        output.append(interpretTwoOperands0(line))
-    elif line[0] == 'pst':
-        output.append(interpretTwoOperands1(line))
-    
+    elif line[0] == 'jmp':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'bge':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'blt':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'bng':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'bps':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'beq':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'bne':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'mld':
+        output.append(interpretTwoOperandsCB(line))
+    elif line[0] == 'mst':
+        output.append(interpretTwoOperandsAB(line))
+    elif line[0] == 'psh':
+        output.append(interpretOneOperandA(line))
+    elif line[0] == 'pop':
+        output.append(interpretOneOperandC(line))
+    elif line[0] == 'cal':
+        output.append(interpretZeroImmediate(line))
+    elif line[0] == 'ret':
+        output.append(interpretZeroOperands(line))
+    else:
+        raise ValueError(f"Unknown instruction: {line[0]}")
+
+for value in output:
+    mccode.write(format(value, f"0{16}b") + '\n')
+
+remaining_lines = 2048 - len(output)
+zero_line = '0' * 16 + '\n'
+mccode.writelines([zero_line] * remaining_lines)
 
 mccode.write(f"{output}")

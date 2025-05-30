@@ -10,12 +10,13 @@ LDI r4 213 # code code
 // even more code
 HLT // gaga
 
+bge 0b11010101111111 ; jump if greater or equal and automatically detects overflow cuts off higher bits
     
-xor r5 r0
+xor r5 r0 r4
 jmp 0x55
 
 ldi r1 56
-   pld r5 r2 ; whitespace doesn't matter either
+   mst r5 r2 ; whitespace doesn't matter either
 
 ADD R5 REG2 r5
 SuB r1 r7 ReG4 ; ok whaAAT

@@ -6,19 +6,19 @@ The assembler is not case sensitive, and comments can be written with ; # /.
 
 Multiple expressions on the same line get logically OR'ed together.
 
-Thanks to [Sloimay](https://github.com/Sloimayyy/mcschematic) for his WorldEdit schematic generator.
+Thanks to [Sloimay](https://github.com/Sloimayyy/mcschematic) for the WorldEdit schematic generator.
 
 ## Instructions
-Write your assembly code in asm.sb, or create a new file and make sure to reference it in `assembly.py` under `asmcode = open('YOURFILE.sb', 'r')`
+Write your assembly code in `asm.s`, or create a new file and make sure to reference it in `assembly.py` under `asmcode = open('assembly/YOURFILE.s', 'r')`
 
-Then, run `assembly.py` and you should see a file named `output.mc`. Once you have that, run `schem.py`, which will read the `output.mc` machine code and turn it into a Minecraft schematic full of barrels with items in them.
+Then, run `assembly.py` and you should see a file named `output.mc` in the machine folder. Once you have that, run `schem.py`, which will read the `output.mc` machine code and turn it into a Minecraft schematic full of barrels with items in them.
 
 If `schem.py` doesn't work, you might need to install mcschematic using pip.
 ```py
 pip install mcschematic
 ```
 
-Then find the schematic in `schems\` and drag it into your WorldEdit schematic folder. (Under `.minecraft\config\worldedit\schematics` by default)
+Then find the schematic in `schems/` and drag it into your WorldEdit schematic folder. (Under `.minecraft/config/worldedit/schematics` by default)
 
 Then, go in-game and load the schematic with `//schem load rom`, or use whatever you named the schematic. Stand underneath the glass that says "paste here" and run `//paste -a`.
 
