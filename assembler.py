@@ -3,7 +3,7 @@
 
 # todo: labels
 
-asmcode = open('assembly/asm.s', 'r') # CHANGE ASM.S TO YOUR ASSEMBLY FILE
+asmcode = open('assembly/test_add.s', 'r') # CHANGE ASM.S TO YOUR ASSEMBLY FILE
 mccode = open('machine/output.mc', 'w') # CHANGE OUTPUT.MC TO YOUR MACHINE CODE FILE
 
 output = []
