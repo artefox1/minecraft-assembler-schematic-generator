@@ -56,21 +56,21 @@ for k in range(8): # bits in column
                 # get barrel pos in list of both H and L barrel (LAYER, WIDTH, LENGTH)
             
                 # new layer every 1024 barrels, (16 wide * 64 long = 1024)
-                # new width every 32 barrels (16 wide * 2 per length = 32)
+                # new width every 64 barrels (16 wide * 2 per length * 2 alternating pairs = 32)   have to go by 2x more because LH before HL again
                 # new length every 1 barrel
 
-                # barrel index is 1024layer + 32width + 2length (+1 for second half of bytes)
+                # barrel index is 1024layer + 64width + 2length (+1 for second half of bytes)
 
-                barrelH = 1024 * k + 32 * j + 2 * i
-                barrelL = 1024 * k + 32 * j + 2 * i + 1
+                barrelH = 1024 * k + 64 * j + 2 * i
+                barrelL = 1024 * k + 64 * j + 2 * i + 1
 
                 # set barrel values in hex (0-15), k is character in line (0-7 for L, 8-15 for H)
                 output[barrelH] = int(instructions[byte0][k]) * offset0 + int(instructions[byte1][k]) * offset1 + int(instructions[byte2][k]) * offset2 + int(instructions[byte3][k]) * offset3
                 output[barrelL] = int(instructions[byte0][k + 8]) * offset0 + int(instructions[byte1][k + 8]) * offset1 + int(instructions[byte2][k + 8]) * offset2 + int(instructions[byte3][k + 8]) * offset3
             else:
                 # L H
-                barrelL = 1024 * k + 32 * j + 2 * i
-                barrelH = 1024 * k + 32 * j + 2 * i + 1
+                barrelL = 1024 * k + 64 * j + 2 * i
+                barrelH = 1024 * k + 64 * j + 2 * i + 1
 
                 output[barrelL] = int(instructions[byte0][k + 8]) * offset0 + int(instructions[byte1][k + 8]) * offset1 + int(instructions[byte2][k + 8]) * offset2 + int(instructions[byte3][k + 8]) * offset3
                 output[barrelH] = int(instructions[byte0][k]) * offset0 + int(instructions[byte1][k]) * offset1 + int(instructions[byte2][k]) * offset2 + int(instructions[byte3][k]) * offset3
