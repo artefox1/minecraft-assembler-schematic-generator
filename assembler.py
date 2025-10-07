@@ -1,6 +1,6 @@
 # Copyright © 2025 artefox
 
-asmcode = open('assembly/tests/test_labels.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
+asmcode = open('assembly/tests/test_clock_EVERYTHING.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
 mccode = open('machine/output.mc', 'w') # CHANGE TO YOUR MACHINE CODE FILE
 
 opcodes = ['nop', 'hlt', 'add', 'adc', 'adi', 'sub', 'sbb', 'and', 'bor', 'nor', 'xor', 'rsh', 'ash', 'mov', 'ldi', 'jmp', 'bge', 'blt', 'bng', 'bps', 'beq', 'bne', 'mld', 'mst', 'psh', 'pop', 'cal', 'ret']
