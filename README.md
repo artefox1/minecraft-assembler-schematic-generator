@@ -53,13 +53,13 @@ They're declared with `@name` and can be referenced anywhere using just `name`.
 Example:
 ```asm
 @start
-LDI R1 0x05
-JMP loop
+LDI R1 0x05  ; PC 0
+JMP loop     ; PC 1
 
 @loop
-SUB R1 R1 R2
-BNE start
-HLT
+SUB R1 R1 R2 ; PC 2
+BNE start    ; PC 3
+HLT          ; PC 4
 ```
 
 ## Program ROM
