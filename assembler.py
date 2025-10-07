@@ -1,12 +1,7 @@
 # Copyright © 2025 artefox
-# idk why you would want to use this code ever, but here it is anyway
 
-# todo: labels
-
-asmcode = open('assembly/test_add.s', 'r') # CHANGE ASM.S TO YOUR ASSEMBLY FILE
-mccode = open('machine/output.mc', 'w') # CHANGE OUTPUT.MC TO YOUR MACHINE CODE FILE
-
-output = []
+asmcode = open('assembly/tests/test_labels.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
+mccode = open('machine/output.mc', 'w') # CHANGE TO YOUR MACHINE CODE FILE
 
 opcodes = ['nop', 'hlt', 'add', 'adc', 'adi', 'sub', 'sbb', 'and', 'bor', 'nor', 'xor', 'rsh', 'ash', 'mov', 'ldi', 'jmp', 'bge', 'blt', 'bng', 'bps', 'beq', 'bne', 'mld', 'mst', 'psh', 'pop', 'cal', 'ret']
 regs0   = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7']
@@ -23,12 +18,24 @@ for index, value in enumerate(regs1):
 for index, value in enumerate(regs2):
     symbols[value] = index
 
+
+# preprocess lines and remove comments / whitespace
 lines = [line.lower().strip() for line in asmcode] # remove nl
 for comments in ['/', ';', '#']:
     lines = [line.split(comments)[0] for line in lines] # divide comments and keep part before them
 lines = [line for line in lines if line.strip()] # comments will be blank so remove them and also removes regular bl
 
 lines = [line.split() for line in lines] # turn into elements per line
+
+# collect labels
+labels = {}
+pc = 0
+for line in lines:
+    if line[0].startswith('@'):
+        label_name = line[0][1:] # remove @
+        labels[label_name] = pc
+    else:
+        pc += 1
 
 # OP    C      A   B
 # 00000 000 00 000 000
@@ -71,7 +78,16 @@ def interpretZeroImmediate(l):
 def interpretOneImmediate(l):
     return (symbols[l[0]] * offset0) + (symbols[l[1]] * offset1) + (evaluateImmediate8(l[2])) # C IMM
 
+output = []
 for line in lines:
+    if line[0].startswith('@'):
+        continue # skip label lines
+
+    # replace label references with values
+    for i, token in enumerate(line):
+        if token in labels:
+            line[i] = str(labels[token])
+
     if line[0] == 'nop':
         output.append(interpretZeroOperands(line))
     elif line[0] == 'hlt':

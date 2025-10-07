@@ -1,0 +1,16 @@
+LDI R1 0x00
+LDI R2 0x01
+LDI R7 0x3F
+
+; loop
+ADD R1 R1 R2
+BGE 0x0A ; end
+MST R1 R7
+
+ADD R2 R1 R2
+BGE 0x0A ; end
+MST R2 R7
+JMP 0x03 ; loop
+
+; end
+HLT

@@ -16,11 +16,12 @@ HLT // gaga
 bge 0b11010101111111 ; jump if greater or equal and automatically detects overflow cuts off higher bits
 
 xor r5 r0 r4
-jmp 0x55
+jmp spot ; labels!!!
 
 ldi r1 56
    mst r5 r2 ; whitespace doesn't matter either
 
+@spot ; declare with @
 ADD R5 REG2 r5
 SuB r1 r7 ReG4 ; ok whaAAT
 
