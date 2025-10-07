@@ -54,11 +54,11 @@ Example:
 ```asm
 @start
 LDI R1 0x05  ; PC 0
-JMP loop     ; PC 1
+JMP loop     ; PC 1  jump to 2
 
 @loop
 SUB R1 R1 R2 ; PC 2
-BNE start    ; PC 3
+BNE start    ; PC 3  jump to 0
 HLT          ; PC 4
 ```
 
