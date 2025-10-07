@@ -1,15 +1,11 @@
 # Custom Python Assembler and Minecraft Barrel ROM Schematic Generator for 1.21.8
 
-The assembler is written for the [SB CPU 3 ISA](https://docs.google.com/spreadsheets/d/145FgBEBUMqR2AwzehXJ7kyqvEKSq50dz7CUwtCOcKwo/edit?usp=sharing).
-
-The assembler is not case sensitive, and comments can be written with ; # /.
-
-Multiple expressions on the same line get logically OR'ed together.
+The assembler compiles programs written for the [SB CPU 3 ISA](https://docs.google.com/spreadsheets/d/145FgBEBUMqR2AwzehXJ7kyqvEKSq50dz7CUwtCOcKwo/edit?usp=sharing) into a .mc file, and the schematic generator turns the machine code into a Minecraft barrel ROM compatible for SB CPU 3.
 
 Thanks to [Sloimay](https://github.com/Sloimayyy/mcschematic) for the WorldEdit schematic generator.
 
 ## Instructions
-Write your assembly code in `asm.s`, or create a new file and make sure to reference it in `assembly.py` under `asmcode = open('assembly/YOURFILE.s', 'r')`
+Write your assembly code in `asm.s`, or create a new file and make sure to reference it in `assembly.py` under `asmcode = open('YOURFILE.s', 'r')`
 
 Then, run `assembly.py` and you should see a file named `output.mc` in the machine folder. Once you have that, run `schem.py`, which will read the `output.mc` machine code and turn it into a Minecraft schematic full of barrels with items in them.
 
@@ -24,6 +20,47 @@ Then, go in-game and load the schematic with `//schem load rom`, or use whatever
 
 ![image](https://github.com/user-attachments/assets/0accb93e-b015-42aa-95df-72150c6c8230)
 
+## Features
+- Multiple expressions per line are automatically logically OR'ed together
+- Case-insensitive (MOV, mov, and MoV all work)
+- Comments can use `;`, `#`, or `/`
+- Flexible immediates
+- Labels for jumps, calls, and branches (resolved automatically) using `@`
+
+### Comments
+You can use any of these to start a comment:
+```
+; this is a comment
+# also a comment
+/ same idea
+```   
+
+Comments can appear inline too:
+```
+LDI R6 5   ; load 5 into r6
+```
+
+### Immediates
+Immediate values are flexible and support:
+- decimal `42`
+- hexadecimal `0x2A`
+- binary `0b101010`
+
+### Labels
+Labels let you name specific program counter (PC) locations.
+They're declared with `@name` and can be referenced anywhere using just `name`.
+
+Example:
+```asm
+@start
+LDI R1 0x05
+JMP loop
+
+@loop
+SUB R1 R1 R2
+BNE start
+HLT
+```
 
 ## Program ROM
 For a brief explanation on how the barrel ROM works, each barrel has a different amount of items in them, which in turn allow them to produce a redstone signal strength which represent binary machine code in hexadecimal. SB CPU 3 automatically converts the hexadecimal signal strength into binary when loading the ROM into the cache.
