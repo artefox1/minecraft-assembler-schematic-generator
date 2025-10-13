@@ -47,6 +47,7 @@ MST R1 R7 ; store 2
 
 ADI R7 0x01 ; add 1 to address
 
+@memory
 ; MEMORY operations (0x3E = 0x03)
 LDI R6 0b110101 ; address
 LDI R5 0x03 ; value

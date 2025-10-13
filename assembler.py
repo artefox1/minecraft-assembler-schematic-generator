@@ -1,5 +1,7 @@
 # Copyright © 2025 artefox
 
+# slightly inspired by mattbatwings assembler
+
 asmcode = open('assembly/tests/test_clock_EVERYTHING.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
 mccode = open('machine/output.mc', 'w') # CHANGE TO YOUR MACHINE CODE FILE
 
