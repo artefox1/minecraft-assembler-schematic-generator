@@ -110,5 +110,6 @@ SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course o
 - **Stack:** 16-deep, 11-bit general stack supporting call/return, push, and pop functions
 - **Branching:** 11-bit address jumping and 6 branch conditions which cover the entire range of the program memory for jumps (no relative jumps/branches)
 
-![image](https://github.com/user-attachments/assets/88832381-2905-4b52-818c-f5074f950f85)
+<img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/de8d94a8-4d73-4b7c-9f0f-bf6c4b14ec76" />
+
 
