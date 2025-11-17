@@ -2,7 +2,7 @@
 
 # slightly inspired by mattbatwings assembler
 
-asmcode = open('assembly/tests/test_cache.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
+asmcode = open('assembly/programs/mandelbrot.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
 mccode = open('machine/output.mc', 'w') # CHANGE TO YOUR MACHINE CODE FILE
 
 opcodes = ['nop', 'hlt', 'add', 'adc', 'adi', 'sub', 'sbb', 'and', 'bor', 'nor', 'xor', 'rsh', 'ash', 'mov', 'ldi', 'jmp', 'bge', 'blt', 'bng', 'bps', 'beq', 'bne', 'mld', 'mst', 'psh', 'pop', 'cal', 'ret']

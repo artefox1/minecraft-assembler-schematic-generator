@@ -252,7 +252,7 @@ adc r7 r7 r7
 # load 0b000101 to r4 and lsh 2 into r5 to be 8.8
 ldi r4 0b000101
 mld r4 r4
-ldi r5 r0 # make sure h is 0
+ldi r5 0x00 # make sure h is 0
 add r4 r4 r4 # if this goes into carry, sign extend
 blt skip_imag_sign # skip if not
 adi r5 0xFF
@@ -287,7 +287,7 @@ sbb r7 r5 r7
 # load 0b000100 into r4 and lsh 2 into r5
 ldi r4 0b000100
 mld r4 r4
-ldi r5 r0
+ldi r5 0x00
 add r4 r4 r4
 blt skip_real_sign
 adi r5 0xFF
@@ -332,6 +332,15 @@ ldi r4 0b010000
 mld r5 r4
 ldi r4 0x3E
 mst r5 r4
+# toggle p4 to write
+ldi r6 0x01
+ldi r7 0x3F
+nop
+nop
+nop
+nop
+mst r6 r7
+mst r0 r7
 
 # flip and plot again
 # 22 - (22 - y) + 21 = y + 21
@@ -339,6 +348,15 @@ sub r2 r3 r2
 adi r2 21
 mst r2 r1
 mst r5 r4
+# toggle p4 to write
+ldi r6 0x01
+ldi r7 0x3F
+nop
+nop
+nop
+nop
+mst r6 r7
+mst r0 r7
 
 ldi r1 0b000100 # add 3 to 0b000100
 mld r2 r1
