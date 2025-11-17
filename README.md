@@ -95,7 +95,7 @@ The table above represents the higher-level view of barrel columns, where each p
 For more details on how the ROM is setup: [Program ROM Specification](https://docs.google.com/document/d/1EYDpcNFcqlE6iPf35c7rxj5VtfZCbD8b9FlhQ1oX37A/edit?usp=sharing)
 
 ## CPU
-SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course of 15 months. The instruction set and pipelining layout is fully custom built for SB CPU 3.
+SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course of 16 months. The instruction set and pipelining layout is fully custom built for SB CPU 3.
 ### SB CPU 3 Specs:
 - **Architecture:** 4-stage pipeline (fetch, decode, execute, writeback)
 - **Hazards:** Handles hazards by forwarding
