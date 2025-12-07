@@ -25,14 +25,14 @@ Then, go in-game and load the schematic with `//schem load rom`, or use whatever
 - Case-insensitive (MOV, mov, and MoV all work)
 - Comments can use `;`, `#`, or `/`
 - Flexible immediates
-- Labels for jumps, calls, and branches (resolved automatically) using `@`
+- Labels for jumps, calls, and branches using `@`
 
 ### Comments
 You can use any of these to start a comment:
 ```
 ; this is a comment
 # also a comment
-/ same idea
+/ vbajwhek
 ```   
 
 Comments can appear inline too:
@@ -53,13 +53,13 @@ They're declared with `@name` and can be referenced anywhere using just `name`.
 Example:
 ```asm
 @start
-LDI R1 0x05  ; PC 0
-JMP loop     ; PC 1  jump to 2
+LDI R1 0x05  ; 0
+JMP loop     ; 1  jump to 2
 
 @loop
-SUB R1 R1 R2 ; PC 2
-BNE start    ; PC 3  jump to 0
-HLT          ; PC 4
+SUB R1 R1 R2 ; 2
+BNE start    ; 3  jump to 0
+HLT          ; 4
 ```
 
 ## Program ROM
@@ -109,6 +109,8 @@ SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course o
 - **ALU:** A fully-featured CCA-based ALU including a right/arithmetic shifter. Includes 3 flags (carry, negative, zero)
 - **Stack:** 16-deep, 11-bit general stack supporting call/return, push, and pop functions
 - **Branching:** 11-bit address jumping and 6 branch conditions which cover the entire range of the program memory for jumps (no relative jumps/branches)
+
+For the fully-detailed list of specs: [SB CPU 3 Specifications](https://docs.google.com/document/d/1WCngtXi5tnHnDGKv0el_PUgTQAJ6DvxOuuVpeg6Zk_w/edit?usp=sharing)
 
 <img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/de8d94a8-4d73-4b7c-9f0f-bf6c4b14ec76" />
 
