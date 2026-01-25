@@ -99,7 +99,7 @@ SB CPU 3 is my 8-bit pipelined redstone CPU built in Minecraft over the course o
 ### SB CPU 3 Specs:
 - **Architecture:** 4-stage pipeline (fetch, decode, execute, writeback)
 - **Hazards:** Handles hazards by forwarding
-- **Clock speed:** 0.36Hz @ 10 rtps / 28 ticks
+- **Clock speed:** 0.36 Hz @ 10 rtps / 28 ticks
 - **Instruction set (ISA):** 28 opcodes and many more pseudo-instructions
 - **Memory and cache:** 
    - 4096 bytes of program ROM (2048 2-byte instructions)
