@@ -26,6 +26,7 @@ Then, go in-game and load the schematic with `//schem load rom`, or use whatever
 - Comments can use `;`, `#`, or `/`
 - Flexible immediates
 - Labels for jumps, calls, and branches using `@`
+- Define constants using `define`
 
 ### Comments
 You can use any of these to start a comment:
@@ -60,6 +61,17 @@ JMP loop     ; 1  jump to 2
 SUB R1 R1 R2 ; 2
 BNE start    ; 3  jump to 0
 HLT          ; 4
+```
+
+### Constants
+Constants let you assign a name to a specific value.
+They're declared with `define [name] [value]` and can be referenced anywhere using just `name`.
+
+Example
+```asm
+define one 0x01
+
+add r1 one one ; same as add r1 0x01 0x01
 ```
 
 ## Program ROM

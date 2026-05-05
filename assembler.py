@@ -2,7 +2,7 @@
 
 # slightly inspired by mattbatwings assembler
 
-asmcode = open('assembly/tests/test_cache.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
+asmcode = open('assembly/programs/grapher.s', 'r') # CHANGE TO YOUR ASSEMBLY FILE
 mccode = open('machine/output.mc', 'w') # CHANGE TO YOUR MACHINE CODE FILE
 
 opcodes = ['nop', 'hlt', 'add', 'adc', 'adi', 'sub', 'sbb', 'and', 'bor', 'nor', 'xor', 'rsh', 'ash', 'mov', 'ldi', 'jmp', 'bge', 'blt', 'bng', 'bps', 'beq', 'bne', 'mld', 'mst', 'psh', 'pop', 'cal', 'ret']
@@ -29,6 +29,22 @@ lines = [line for line in lines if line.strip()] # comments will be blank so rem
 
 lines = [line.split() for line in lines] # turn into elements per line
 
+defines = {}
+
+# collect defines
+new_lines = []
+for line in lines:
+    if line[0] == 'define':
+        if len(line) != 3:
+            raise ValueError(f"Invalid define: {' '.join(line)}")
+        name = line[1]
+        value = line[2]
+        defines[name] = value
+    else:
+        new_lines.append(line)
+
+lines = new_lines
+
 # collect labels
 labels = {}
 pc = 0
@@ -36,6 +52,13 @@ for line in lines:
     if line[0].startswith('@'):
         label_name = line[0][1:] # remove @
         labels[label_name] = pc
+        continue
+
+    for i, token in enumerate(line):
+        if token in labels:
+            line[i] = str(labels[token])
+        elif token in defines:
+            line[i] = defines[token]
     else:
         pc += 1
 
