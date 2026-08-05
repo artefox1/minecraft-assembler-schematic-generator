@@ -49,6 +49,10 @@ define yL 0x1C
 define lastyH 0x1F
 define lastyL 0x1E
 
+# to align with vcb program
+nop
+nop
+
 jmp start
 
 # product in r7:r6:r5, unsigned in 000003:000002:000001, uses 000000
